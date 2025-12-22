@@ -125,34 +125,6 @@
 
                 <table class="table table-bordered">
                     <tr style="border: 2px solid black;">
-                        <t t-if="doc.company_id.name != 'Easy Parking'">
-                            <td>
-                                <strong>Salman Al Haqbani</strong>
-                            </td>
-                            <t t-if="doc.company_id.name != 'Easy Valet'">
-                                <td>
-                                    <strong>Islam Awad</strong>
-                                </td>
-                            </t>
-                            <td>
-                                <strong>Ahmed Ibrahim</strong>
-                            </td>
-                            <t t-if="doc.hr">
-                                <td>
-                                    <strong>Wjdan Alsubaie</strong>
-                                </td>
-                            </t>
-                            <t t-if="doc.company_id.name != 'Easy Valet' and not doc.hr">
-                                <td>
-                                    <strong>Shorouk Mohamed</strong>
-                                </td>
-                            </t>
-                            <t t-if="doc.company_id.name == 'Easy Valet'">
-                                <td>
-                                    <strong>Ahmed Amin</strong>
-                                </td>
-                            </t>
-                        </t>
                         <t t-if="doc.company_id.name == 'Easy Parking'">
                             <td>
                                 <strong>Prepared By</strong>
@@ -167,34 +139,93 @@
                                 <strong>Salman Al Haqbani</strong>
                             </td>
                         </t>
+
+                        <t t-if="doc.company_id.name != 'Easy Parking'">
+                            <td>
+                                <strong>Salman Al Haqbani</strong>
+                            </td>
+
+                            <t t-if="doc.company_id.name != 'Easy Valet'">
+                                <td>
+                                    <strong>Islam Awad</strong>
+                                </td>
+                            </t>
+
+                            <td>
+                                <strong t-if="doc.company_id.name != 'Easy Valet'">Ahmed Ibrahim</strong>
+                                <strong t-if="doc.company_id.name == 'Easy Valet'">Ahmed Amin</strong>
+                            </td>
+
+                            <t t-if="doc.hr">
+                                <td>
+                                    <strong>Wjdan Alsubaie</strong>
+                                </td>
+                            </t>
+
+                            <t t-if="doc.company_id.name != 'Easy Valet' and not doc.hr">
+                                <td>
+                                    <strong>Shorouk Mohamed</strong>
+                                </td>
+                            </t>
+                        </t>
                     </tr>
 
                     <tr style="height: 100px;">
+                        <t t-if="doc.company_id.name == 'Easy Parking'">
+                            <td>
+                                <span />
+                            </td>
+                            <td>
+                                <span />
+                            </td>
+                            <td>
+                                <span />
+                            </td>
+                            <td>
+                                <span />
+                            </td>
+                        </t>
+
                         <t t-if="doc.company_id.name != 'Easy Parking'">
                             <td>
                                 <span t-if="doc.state == 'approve'">
                                     <img src="/etech_mpr/static/description/salman.png"
-                                        style="width:150px; height: 100px; " />
+                                        style="width:150px; height: 100px;" />
                                 </span>
                             </td>
+
                             <t t-if="doc.company_id.name != 'Easy Valet'">
                                 <td>
                                     <span t-if="doc.state in ['ir_approve', 'approve']">
                                         <img src="/etech_mpr/static/description/islam.png"
-                                            style="width:150px; height: 100px; " />
+                                            style="width:150px; height: 100px;" />
                                     </span>
                                 </td>
                             </t>
+
                             <td>
-                                <span t-if="doc.state in ['dept_confirm', 'ir_approve', 'approve']">
+                                <span t-if="doc.company_id.name == 'Easy Valet'">
+                                    <img src="/etech_mpr/static/description/amin.png"
+                                        style="width:150px; height: 100px;" />
+                                </span>
+                                <span
+                                    t-if="doc.company_id.name != 'Easy Valet' and doc.state in ['dept_confirm', 'ir_approve', 'approve']">
                                     <img src="/etech_mpr/static/description/ibrahim.png"
-                                        style="width:150px; height: 100px; " />
+                                        style="width:150px; height: 100px;" />
                                 </span>
                             </td>
+
+                            <t t-if="doc.hr">
+                                <td>
+                                    <img src="/etech_mpr/static/description/wajdan.png"
+                                        style="width:150px; height: 100px;" />
+                                </td>
+                            </t>
+
                             <t t-if="doc.company_id.name != 'Easy Valet' and not doc.hr">
                                 <td>
                                     <img src="/etech_mpr/static/description/shorouk.png"
-                                        style="width:150px; height: 100px; " />
+                                        style="width:150px; height: 100px;" />
                                 </td>
                             </t>
                         </t>
