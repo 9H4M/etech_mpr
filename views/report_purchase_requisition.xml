@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_requisition_report_custom"
+        inherit_id="material_purchase_requisitions.purchase_requisition">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <div class="text-center">
+                    <h2>
+                        <strong>
+                            <p>Payment Request <span t-field="doc.name" />
+                            </p>
+                        </strong>
+                        <br />
+                    </h2>
+                </div>
+
+                <table class="table table-bordered" style="border: 2px solid black;">
+                    <tr>
+                        <td>
+                            <strong>Beneficiary</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.partner_id.name" />
+                        </td>
+                        <td>
+                            <strong>Requisition Date</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.request_date" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Bank Name </strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.bank_name" />
+                        </td>
+                        <td>
+                            <strong>Priority</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.priority" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Account Number</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.account_number" />
+                        </td>
+                        <td>
+                            <strong>Total Amount</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.total_amount" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Company</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.company_id.name" />
+                        </td>
+                        <td>
+                            <strong>Description</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.reason" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Payment Method</strong>
+                        </td>
+                        <td>
+                            <t t-if="doc.payment_method == 'cash'">
+                                <span> نقدى </span>
+                            </t>
+                            <t t-if="doc.payment_method == 'cheque'">
+                                <span> شيك </span>
+                            </t>
+                            <t t-if="doc.payment_method == 'bank'">
+                                <span> سداد </span>
+                            </t>
+                            <t t-if="doc.payment_method == 'lc'">
+                                <span>حوالة</span>
+                            </t>
+                        </td>
+                        <td>
+                            <strong>Currency</strong>
+                        </td>
+                        <td>
+                            <span t-field="doc.currency.name" />
+                        </td>
+                    </tr>
+                </table>
+
+                <strong>
+                    <h3>Requisition Lines</h3>
+                </strong>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="border: 2px solid black;">
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="doc.requisition_line_ids" t-as="line">
+                            <tr style="border: 1px solid grey;">
+                                <td>
+                                    <span t-field="line.description" />
+                                </td>
+                                <td>
+                                    <span t-field="line.amount" />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <br />
+
+                <table class="table table-bordered">
+                    <tr style="border: 2px solid black;">
+                        <t t-if="doc.company_id.name != 'Easy Parking'">
+                            <td>
+                                <strong>Salman Al Haqbani</strong>
+                            </td>
+                            <t t-if="doc.company_id.name != 'Easy Valet'">
+                                <td>
+                                    <strong>Islam Awad</strong>
+                                </td>
+                            </t>
+                            <td>
+                                <strong>Ahmed Ibrahim</strong>
+                            </td>
+                            <t t-if="doc.hr">
+                                <td>
+                                    <strong>Wjdan Alsubaie</strong>
+                                </td>
+                            </t>
+                            <t t-if="doc.company_id.name != 'Easy Valet' and not doc.hr">
+                                <td>
+                                    <strong>Shorouk Mohamed</strong>
+                                </td>
+                            </t>
+                            <t t-if="doc.company_id.name == 'Easy Valet'">
+                                <td>
+                                    <strong>Ahmed Amin</strong>
+                                </td>
+                            </t>
+                        </t>
+                        <t t-if="doc.company_id.name == 'Easy Parking'">
+                            <td>
+                                <strong>Prepared By</strong>
+                            </td>
+                            <td>
+                                <strong>Sayed Azmi</strong>
+                            </td>
+                            <td>
+                                <strong>Ibrahim Abdulhamid</strong>
+                            </td>
+                            <td>
+                                <strong>Salman Al Haqbani</strong>
+                            </td>
+                        </t>
+                    </tr>
+
+                    <tr style="height: 100px;">
+                        <t t-if="doc.company_id.name != 'Easy Parking'">
+                            <td>
+                                <span t-if="doc.state == 'approve'">
+                                    <img src="/etech_mpr/static/description/salman.png"
+                                        style="width:150px; height: 100px; " />
+                                </span>
+                            </td>
+                            <t t-if="doc.company_id.name != 'Easy Valet'">
+                                <td>
+                                    <span t-if="doc.state in ['ir_approve', 'approve']">
+                                        <img src="/etech_mpr/static/description/islam.png"
+                                            style="width:150px; height: 100px; " />
+                                    </span>
+                                </td>
+                            </t>
+                            <td>
+                                <span t-if="doc.state in ['dept_confirm', 'ir_approve', 'approve']">
+                                    <img src="/etech_mpr/static/description/ibrahim.png"
+                                        style="width:150px; height: 100px; " />
+                                </span>
+                            </td>
+                            <t t-if="doc.company_id.name != 'Easy Valet' and not doc.hr">
+                                <td>
+                                    <img src="/etech_mpr/static/description/shorouk.png"
+                                        style="width:150px; height: 100px; " />
+                                </td>
+                            </t>
+                        </t>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>
