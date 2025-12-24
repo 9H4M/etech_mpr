@@ -1,6 +1,6 @@
 {
     "name": "E-Tech Material Purchase Requisition Customization",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Purchase",
     "summary": "Modified Requisition Report for E-Tech",
     "author": "Hani Emara",
